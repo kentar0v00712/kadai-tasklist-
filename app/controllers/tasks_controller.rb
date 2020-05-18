@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
       @tasks = Task.all
   end
@@ -30,12 +30,12 @@ class TasksController < ApplicationController
 
   def update
      
-      if @task.save
+      if @task.update(task_params)
           flash[:success] = "タスクが正常に更新されました"
           redirect_to @task
       else
           flash.now[:danger] = "タスクは更新されませんでした"
-          render :new
+          render :edit
       end 
   end
 
